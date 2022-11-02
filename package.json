@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "inquirer": "^9.1.4",
+    "mysql2": "^2.3.3"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "sql-proj",
+  "description": "This is my attempt at the module 12 SQL project",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jordancolubiale/sql-proj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jordancolubiale/sql-proj/issues"
+  },
+  "homepage": "https://github.com/Jordancolubiale/sql-proj#readme"
+}
