@@ -2,6 +2,7 @@
 const mysql = require('mysql2');
 
 const inquirer = require('inquirer');
+const { response } = require('express');
 // Connect to database
 const db = mysql.createConnection(
     {
@@ -29,59 +30,55 @@ const questions = [{
         }
     }
 }]
-
-// {
-//     type: 'text',
-//     message: 'Email used for github?',
-//     name: 'email',
-// },
-// {
-//     type: 'text',
-//     message: 'List steps to install',
-//     name: 'install',
-// },
-// {
-//     type: 'text',
-//     message: 'List any third party assets used',
-//     name: 'thirdParty',
-// },
-// {
-//     type: 'text',
-//     message: 'Project Name?',
-//     name: 'title',
-// },
-// {
-//     type: 'text',
-//     message: 'Short Project Description.',
-//     name: 'description',
-// },
-// {
-//     type: 'text',
-//     message: 'List your fellow Collaborators',
-//     name: 'team',
-// },
-// {
-//     type: 'input',
-//     message: 'What should be done to run tests?',
-//     name: 'test',
-// },
-// {
-//     type: 'input',
-//     message: 'What does the user need to know about using the repo?',
-//     name: 'usage',
-// },
-// {
-//     type: 'input',
-//     message: 'Who else helped contribute to the project?',
-//     name: 'contributions',
-// },
-
-// {
-//     type: 'text',
-//     message: 'What is your Github URL',
-//     name: 'gitHub',
-// },
-// ];
+function add_department() {
+    inquirer.prompt([
+        {
+            type: "input", name: "name"
+        }
+    ]).then(response => {
+        db.query("INSERT INTO department", function (err, result) {
+            if (err) throw err
+            console.table(result)
+            init()
+        })
+    })
+}
+function add_role() {
+    inquirer.prompt([
+        {
+            type: "input", name: "name"
+        },
+        {
+            type: "input", name: "title"
+        },
+        {
+            type: "input", name: "salary"
+        }
+    ]).then(response => {
+        db.query("INSERT INTO role", function (err, result) {
+            if (err) throw err
+            console.table(result)
+            init()
+        })
+    })
+}
+function add_employee() {
+    inquirer.prompt([
+        {
+            type: "input", name: "first_name"
+        },
+        {
+            type: "input", name: "last_name"
+        }
+    ]).then(response => {
+        db.query("INSERT INTO employee", function (err, result) {
+            if (err) throw err
+            console.table(result)
+            init()
+        })
+        //db query with insert command
+    })
+}
 function view_departments() {
     db.query("SELECT * FROM department", function (err, result) {
         if (err) throw err
@@ -116,6 +113,15 @@ function init() {
             }
             if (responses.startup === "view all employees") {
                 view_employees()
+            }
+            if (responses.startup === "add a department") {
+                view_departments()
+            }
+            if (responses.startup === "add a role") {
+                view_departments()
+            }
+            if (responses.startup === "add an employee") {
+                view_departments()
             }
         });
 }
