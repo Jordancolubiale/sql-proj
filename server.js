@@ -1,4 +1,3 @@
-// Import and require mysql2
 const mysql = require('mysql2');
 
 const inquirer = require('inquirer');
@@ -20,7 +19,7 @@ const questions = [{
     type: 'list',
     name: 'startup',
     message: 'What do you want to do?',
-    choices: ["view all departments", "view all roles", "view all employees", "add a department", "add a role", "add an employee", "update an employee role"],
+    choices: ["view all departments", "view all roles", "view all employees", "add a department", "add a role", "add an employee"],
     validate: nameInput => {
         if (nameInput) {
             return true;
@@ -76,7 +75,6 @@ function add_employee() {
             console.table(result)
             init()
         })
-        //db query with insert command
     })
 }
 function view_departments() {
@@ -115,13 +113,13 @@ function init() {
                 view_employees()
             }
             if (responses.startup === "add a department") {
-                view_departments()
+                add_department()
             }
             if (responses.startup === "add a role") {
-                view_departments()
+                add_role()
             }
             if (responses.startup === "add an employee") {
-                view_departments()
+                add_employee()
             }
         });
 }
